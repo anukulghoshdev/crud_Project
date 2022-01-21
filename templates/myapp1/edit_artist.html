@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends "myapp1/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+<!-- {% block title %} django-home {% endblock %} -->
+{% block linkcss %}<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+
+{% block body %}
+
+{% if success_text %}
+<div class="alert alert-success">
+    <strong>{{ success_text }}</strong>
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ edit_form|crispy}}
+    <input class="btn btn-success" type="submit" value="Update" >
+
+    <a href="{% url 'my_app1:home' %}" class="btn btn-primary">Back</a>
+</form>
+{% endblock %}

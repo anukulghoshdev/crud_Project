@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% extends "myapp1/base.html" %}
+
+{% load static %}
+
+
+<!-- {% block title %} django-home {% endblock %} -->
+{% block linkcss %}<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+
+{% block body %}
+<!-- we can't run loop because we get one object by an speceific id(artist/musician id as artist_info.id) -->
+<table class="table table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th>Artist Name</th>
+      <th>Instrument</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><h5>{{ artist_info.first_name }} {{artist_info.last_name}}</h5></td>
+      <td><h5>{{ artist_info.instrument }}</h5></td>
+      <td><h5>{{ artist_rate.num_stars__avg }}</h5></td>
+    </tr>
+
+  </tbody>
+</table>
+
+<a href="{% url 'my_app1:edit_artist' artist_id=artist_info.id %}" class="btn btn-success btn-lg">Edit</a>
+<a href="{% url 'my_app1:delete_artist' artist_id=artist_info.id%}" class="btn btn-danger btn-lg" onclick="return confirm('Do you want to delete this Artist?')">Delete</a>
+
+
+<h2 class="text-center">List of Albums</h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th>Album Name</th>
+      <th>Release Date</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for album in album_list %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td><h4><a href="{% url 'my_app1:edit_album'  album_id=album.id %}">{{ album.name }}</a></h4></td>
+      <td>{{ album.release_datefield | date:"D d M Y" }}</td>
+      <td>{{ album.num_stars }}/5</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

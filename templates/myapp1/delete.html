@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+{% extends "myapp1/base.html" %}
+{% load static %}
+
+{% block linkcss %}<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+{% block body %}
+<div class="alert alert-danger">
+    <strong>{{ delete_success_text }}</strong>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% extends "myapp1/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+<!-- {% block title %} django-home {% endblock %} -->
+{% block linkcss %}<link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock %}
+
+
+{% block body %}
+
+<h1 class="text-center" >Musician Form</h1>
+<form  action="#" method="post" >  
+  {% csrf_token %}
+  {{ musician_form|crispy}}
+  <input class="btn btn-success" type="submit" value="Add Now" >
+
+  <a href="{% url 'my_app1:home' %}" class="btn btn-primary">Back</a>
+</form>
+
+
+{% endblock %}
